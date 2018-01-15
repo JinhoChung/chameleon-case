@@ -1,7 +1,6 @@
-import 'babel-polyfill'
-import _ from 'lodash'
-import camelcaseLib from 'camelcase'
-import snakeCaseLib from 'snake-case'
+var _ = require('lodash')
+var camelcaseLib = require('camelcase')
+var snakeCaseLib = require('snake-case')
 
 /**
  *
@@ -13,9 +12,9 @@ import snakeCaseLib from 'snake-case'
  *
  */
 
-let mongooseObjectSanitizer = (node) => {
-  let needToMakeObjectFirst = ['model', 'EmbeddedDocument']
-  let needToOmitFields = ['_id', '__v']
+var mongooseObjectSanitizer = (node) => {
+  var needToMakeObjectFirst = ['model', 'EmbeddedDocument']
+  var needToOmitFields = ['_id', '__v']
 
   if (!_.isEmpty(node) && typeof node === 'object' && node.constructor && needToMakeObjectFirst.includes(node.constructor.name)) {
     return _.omit(node.toObject(), needToOmitFields)
@@ -31,16 +30,16 @@ var options = {
   objectSanitizer: mongooseObjectSanitizer
 }
 
-let option = (inputOptions) => {
+var option = (inputOptions) => {
   options = _.defaults(inputOptions, options)
 }
 
-let resolveContextOptions = (oneOffOptions) => {
+var resolveContextOptions = (oneOffOptions) => {
   oneOffOptions = _.assignIn(oneOffOptions, options)
   return oneOffOptions
 }
 
-let sanitize = (node, contextOptions) => {
+var sanitize = (node, contextOptions) => {
   if (!node) {
     return node
   }
@@ -52,14 +51,14 @@ let sanitize = (node, contextOptions) => {
   if (!contextOptions) {
     throw new Error('Option must have values')
   } else {
-    let objectSanitizer = contextOptions.objectSanitizer
+    var objectSanitizer = contextOptions.objectSanitizer
     if (!objectSanitizer) {
       return node
     } else if (typeof objectSanitizer === 'function') {
       return objectSanitizer(node)
     } else if (typeof objectSanitizer === 'object') {
       if (node.constructor && node.constructor.name) {
-        let constructorName = node.constructor.name
+        var constructorName = node.constructor.name
         if (objectSanitizer.hasOwnProperty(constructorName) && typeof objectSanitizer[constructorName] === 'function') {
           return objectSanitizer[constructorName](node)
         }
@@ -69,8 +68,8 @@ let sanitize = (node, contextOptions) => {
   return node
 }
 
-let camelcase = (node, oneOffOptions) => {
-  let contextOptions = resolveContextOptions(oneOffOptions)
+var camelcase = (node, oneOffOptions) => {
+  var contextOptions = resolveContextOptions(oneOffOptions)
   if (Array.isArray(node)) {
     return transformArray(node, camelcaseLib, contextOptions)
   } else {
@@ -78,8 +77,8 @@ let camelcase = (node, oneOffOptions) => {
   }
 }
 
-let snakecase = (node, oneOffOptions) => {
-  let contextOptions = resolveContextOptions(oneOffOptions)
+var snakecase = (node, oneOffOptions) => {
+  var contextOptions = resolveContextOptions(oneOffOptions)
   if (Array.isArray(node)) {
     return transformArray(node, snakeCaseLib, contextOptions)
   } else {
@@ -87,25 +86,25 @@ let snakecase = (node, oneOffOptions) => {
   }
 }
 
-let isArray = (node) => {
+var isArray = (node) => {
   return (Array.isArray && Array.isArray(node)) || Object.prototype.toString.call(node) === '[object Array]'
 }
 
-let isInIgnoreClass = (node, contextOptions) => {
+var isInIgnoreClass = (node, contextOptions) => {
   if (node && node.constructor.name && contextOptions.ignoreClass.includes(node.constructor.name)) {
     return true
   }
   return false
 }
 
-let isObject = (node) => {
+var isObject = (node) => {
   if (!node) {
     return false
   }
   return typeof node === 'object' || typeof node === 'function'
 }
 
-let transformArray = (nodes, f, contextOptions) => {
+var transformArray = (nodes, f, contextOptions) => {
   return _.map(nodes, (value) => {
     if (isArray(value)) {
       return transformArray(value, f, contextOptions)
@@ -121,12 +120,12 @@ let transformArray = (nodes, f, contextOptions) => {
   })
 }
 
-let transformObject = (node, f, contextOptions) => {
-  let obj = sanitize(node, contextOptions)
-  let newObj = {}
+var transformObject = (node, f, contextOptions) => {
+  var obj = sanitize(node, contextOptions)
+  var newObj = {}
 
   _.forIn(obj, (value, key) => {
-    let transformedKey = f(key)
+    var transformedKey = f(key)
 
     if (isArray(value)) {
       newObj[transformedKey] = transformArray(value, f, contextOptions)
@@ -143,8 +142,8 @@ let transformObject = (node, f, contextOptions) => {
   return newObj
 }
 
-export default {
-  option,
-  camelcase,
-  snakecase
-}
+module.exports = {
+  option: option,
+  camelcase: camelcase,
+  snakecase: snakecase
+};

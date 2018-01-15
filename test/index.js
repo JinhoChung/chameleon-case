@@ -1,34 +1,34 @@
 /* eslint-disable no-undef */
-import chai from 'chai'
-import cc from '../src/index'
+var chai = require('chai')
+var cc = require('../src/index')
 
-let expect = chai.expect
+var expect = chai.expect
 
 describe('change-object-case', function () {
   it('camelcase object', function () {
-    let input = {
+    var input = {
       string_field: 'string'
     }
 
-    let fixture = {
+    var fixture = {
       stringField: 'string'
     }
     expect(cc.camelcase(input)).to.deep.equal(fixture)
   })
 
   it('snakecase object', function () {
-    let input = {
+    var input = {
       stringField: 'string'
     }
 
-    let fixture = {
+    var fixture = {
       string_field: 'string'
     }
     expect(cc.snakecase(input)).to.deep.equal(fixture)
   })
 
   it('camelcase array', function () {
-    let input = [
+    var input = [
       {
         string_field: 'string'
       },
@@ -37,7 +37,7 @@ describe('change-object-case', function () {
       }
     ]
 
-    let fixture = [
+    var fixture = [
       {
         stringField: 'string'
       },
@@ -49,7 +49,7 @@ describe('change-object-case', function () {
   })
 
   it('snakecase array', function () {
-    let input = [
+    var input = [
       {
         stringField: 'string'
       },
@@ -58,7 +58,7 @@ describe('change-object-case', function () {
       }
     ]
 
-    let fixture = [
+    var fixture = [
       {
         string_field: 'string'
       },
@@ -71,7 +71,7 @@ describe('change-object-case', function () {
 
   describe('nested object', function () {
     it('camelcase', function () {
-      let input = {
+      var input = {
         stringField: 'string',
         integerField: 10,
         floatField: 10.5,
@@ -136,7 +136,7 @@ describe('change-object-case', function () {
         }
       }
 
-      let fixture = {
+      var fixture = {
         string_field: 'string',
         integer_field: 10,
         float_field: 10.5,
@@ -208,14 +208,14 @@ describe('change-object-case', function () {
     describe('ignoreClass', function () {
       it('should not same on Date type', function () {
         // 디폴트 옵션 사용
-        let now = new Date()
+        var now = new Date()
 
-        let input = {
+        var input = {
           stringField: 'string',
           dateField: now
         }
 
-        let fixture = {
+        var fixture = {
           string_field: 'string',
           date_field: now
         }
@@ -229,14 +229,14 @@ describe('change-object-case', function () {
           ignoreClass: []
         })
 
-        let now = new Date()
+        var now = new Date()
 
-        let input = {
+        var input = {
           stringField: 'string',
           dateField: now
         }
 
-        let fixture = {
+        var fixture = {
           string_field: 'string',
           date_field: now
         }
@@ -251,14 +251,14 @@ describe('change-object-case', function () {
           ignoreClass: ['Date']
         })
 
-        let now = new Date()
+        var now = new Date()
 
-        let input = {
+        var input = {
           stringField: 'string',
           dateField: now
         }
 
-        let fixture = {
+        var fixture = {
           string_field: 'string',
           date_field: now
         }
@@ -273,8 +273,8 @@ describe('change-object-case', function () {
       cc.option({
         ignoreClass: ['Date']
       })
-      let now = new Date()
-      let input = {
+      var now = new Date()
+      var input = {
         stringField: 'string',
         integerField: 10,
         floatField: 10.5,
@@ -347,7 +347,7 @@ describe('change-object-case', function () {
         }
       }
 
-      let fixture = {
+      var fixture = {
         string_field: 'string',
         integer_field: 10,
         float_field: 10.5,

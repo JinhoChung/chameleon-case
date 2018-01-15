@@ -4,11 +4,7 @@
   "description": "Nested Object or Array case changer.",
   "main": "dist/index.js",
   "scripts": {
-    "prepublish": "babel src --out-dir dist",
-    "clean": "rm -rf dist && mkdir dist",
-    "start": "nodemon src/index.js --exec babel-node",
-    "build": "npm run clean && babel src -d dist",
-    "test": "node ./node_modules/mocha/bin/mocha 'test/*.js' --require babel-core/register --require babel-polyfill"
+    "test": "node ./node_modules/mocha/bin/mocha 'test/*.js'"
   },
   "keywords": [
     "change",
@@ -23,17 +19,11 @@
   },
   "homepage": "https://github.com/JinhoChung/change-object-case#readme",
   "dependencies": {
-    "babel-polyfill": "6.26.0",
     "camelcase": "^4.1.0",
     "lodash": "^4.17.4",
     "snake-case": "^2.1.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-es2015": "6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "eslint": "^4.15.0",
     "eslint-config-import": "^0.13.0",
