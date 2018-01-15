@@ -12,6 +12,7 @@ var snakeCaseLib = require('snake-case')
  *
  */
 
+// mongoose sanitizer example
 var mongooseObjectSanitizer = (node) => {
   var needToMakeObjectFirst = ['model', 'EmbeddedDocument']
   var needToOmitFields = ['_id', '__v']
@@ -27,7 +28,9 @@ var options = {
   ignoreClass: [], // e.g. ['Date']
 
   // for Mongoose Object
-  objectSanitizer: mongooseObjectSanitizer
+  objectSanitizer: (node) => {
+    return node
+  }
 }
 
 var option = (inputOptions) => {
