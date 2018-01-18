@@ -48,7 +48,7 @@ var isArray = (node) => {
 }
 
 var isInIgnoreClass = (node, contextOptions) => {
-  if (node && node.constructor.name && contextOptions.ignoreClass.includes(node.constructor.name)) {
+  if (node && node.constructor && node.constructor.name && contextOptions.ignoreClass.includes(node.constructor.name)) {
     return true
   }
   return false
