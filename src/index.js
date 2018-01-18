@@ -26,20 +26,36 @@ var resolveContextOptions = (oneOffOptions) => {
 }
 
 var camelcase = (node, oneOffOptions) => {
-  var contextOptions = resolveContextOptions(oneOffOptions)
-  if (Array.isArray(node)) {
-    return transformArray(node, camelcaseLib, contextOptions)
-  } else {
-    return transformObject(node, camelcaseLib, contextOptions)
+  try {
+    var contextOptions = resolveContextOptions(oneOffOptions)
+    if (Array.isArray(node)) {
+      return transformArray(node, camelcaseLib, contextOptions)
+    } else {
+      return transformObject(node, camelcaseLib, contextOptions)
+    }
+  } catch (e) {
+    if (e.message === 'Maximum call stack size exceeded') {
+      throw new Error('Object is too big to process. Try after optimize it.')
+    } else {
+      throw e
+    }
   }
 }
 
 var snakecase = (node, oneOffOptions) => {
-  var contextOptions = resolveContextOptions(oneOffOptions)
-  if (Array.isArray(node)) {
-    return transformArray(node, snakeCaseLib, contextOptions)
-  } else {
-    return transformObject(node, snakeCaseLib, contextOptions)
+  try {
+    var contextOptions = resolveContextOptions(oneOffOptions)
+    if (Array.isArray(node)) {
+      return transformArray(node, snakeCaseLib, contextOptions)
+    } else {
+      return transformObject(node, snakeCaseLib, contextOptions)
+    }
+  } catch (e) {
+    if (e.message === 'Maximum call stack size exceeded') {
+      throw new Error('Object is too big to process. Try after optimize it.')
+    } else {
+      throw e
+    }
   }
 }
 

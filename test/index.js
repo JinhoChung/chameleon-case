@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 var chai = require('chai')
 var cc = require('../src/index')
+var mongoose = require('mongoose')
 
 var expect = chai.expect
 
@@ -67,6 +68,19 @@ describe('change-object-case', function () {
       }
     ]
     expect(cc.snakecase(input)).to.deep.equal(fixture)
+  })
+
+  it('throw error', function () {
+    var testObjectSchema = new mongoose.Schema({
+      string_field: { type: String }
+    })
+    var TestObject = mongoose.model('TestObject', testObjectSchema)
+
+    var input = new TestObject({
+      string_field: 'string field'
+    })
+
+    expect(function () { cc.camelcase(input) }).to.throw('Object is too big to process. Try after optimize it.')
   })
 
   describe('nested object', function () {
