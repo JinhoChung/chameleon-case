@@ -94,6 +94,10 @@ var transformArray = (nodes, f, contextOptions) => {
 }
 
 var transformObject = (node, f, contextOptions) => {
+  if (!node || !node.hasOwnProperty) {
+    return node
+  }
+
   var newObj = {}
 
   _.forIn(node, (value, key) => {
