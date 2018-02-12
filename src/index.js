@@ -94,7 +94,7 @@ var transformArray = (nodes, f, contextOptions) => {
 }
 
 var transformObject = (node, f, contextOptions) => {
-  if (!node || !node.hasOwnProperty) {
+  if (!node) {
     return node
   }
 
