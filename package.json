@@ -1,6 +1,6 @@
 {
   "name": "chameleon-case",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Nested Object or Array case changer.",
   "main": "dist/index.js",
   "scripts": {
