@@ -5,7 +5,7 @@ var mongoose = require('mongoose')
 
 var expect = chai.expect
 
-describe('change-object-case', function () {
+describe('chameleon-case', function () {
   it('camelcase object', function () {
     var input = {
       string_field: 'string'

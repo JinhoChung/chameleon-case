@@ -1,5 +1,5 @@
 {
-  "name": "change-object-case",
+  "name": "chameleon-case",
   "version": "0.0.1",
   "description": "Nested Object or Array case changer.",
   "main": "dist/index.js",
@@ -15,9 +15,9 @@
   "author": "jinhochung",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JinhoChung/change-object-case/issues"
+    "url": "https://github.com/JinhoChung/chameleon-case/issues"
   },
-  "homepage": "https://github.com/JinhoChung/change-object-case#readme",
+  "homepage": "https://github.com/JinhoChung/chameleon-case#readme",
   "dependencies": {
     "camelcase": "^4.1.0",
     "lodash": "^4.17.4",
